@@ -1,0 +1,374 @@
+Código Fonte:
+
+Tinkercad:
+
+/**
+  Ilumina��o de garagem autom�tica
+  ------------------------
+  |  Sensor  |  Arduino  |
+  |   VCC    |    5V     |
+  |  Trig    |    4V     |
+  |  Echo    |    A4     |
+  |   GND    |    GND    |
+  ------------------------
+  @author Luis, Pedro, Lucas, Miqueias e Joao Andrade
+*/
+
+int sensorLDR = 700;
+long sensor;
+int oitava = 1;
+float SE5 = 659.25;
+float SC5 = 523.25;
+int LED = 9;
+int leitor;
+#include <Servo.h>
+Servo servo1;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(A4, INPUT);   //echo
+  pinMode(A5, OUTPUT);  //trig
+  pinMode(5, INPUT_PULLUP);
+  pinMode(10, INPUT_PULLUP);  //Campainha
+  pinMode(9, OUTPUT);        //LED
+  pinMode(8, OUTPUT);        //Buzzer
+  pinMode(12, OUTPUT);  //CONFIGURANDO O PINO 13 COMO SAIDA
+  servo1.attach(7);
+  
+ }
+
+void loop() {
+
+bluetooth();
+campainha();
+sensorLuminosidade();
+
+}
+
+void bluetooth() {
+
+
+
+  if (Serial.available()) {                //essa estrutura evita o acionamento indevido do led ou de outros dispostivos
+    leitor = Serial.read();                //armazenando a tecla pressionada na variavel leitor
+    if (leitor == '1') {                   //se tecla 1 for pressionada
+      digitalWrite(12, !digitalRead(12));  //ele vai verificar se o dispositivo esta ativado ou desativado
+    } else if (leitor == '2') {            //abrir garagem via bluetooth
+      abrirg();
+    } else if (leitor == '3') {            //fechar garagem via bluetooth
+      fecharg();
+    }
+  }  
+}
+
+void abrirg() {
+
+      servo1.write(90);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(4, LOW);
+      noTone(6);
+}
+
+void fecharg() {
+      servo1.write(0);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(4, LOW);
+      noTone(6);
+}
+
+void sensorLuminosidade() {
+  
+int sensorLDR = analogRead(A0);
+if (sensorLDR > 500) {
+    digitalWrite(2, LOW);
+ } else {
+    digitalWrite(2, HIGH);
+ }
+  
+}
+
+void campainha() {
+int campainha = 8;
+  
+  int sw2 = digitalRead(10);
+
+  if (sw2 == 0) {
+    tone(campainha, SE5 * oitava);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    tone(campainha, SC5 * oitava);
+    digitalWrite(LED, LOW);
+    delay(200);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+  } else {
+    digitalWrite(LED, LOW);
+    noTone(campainha);
+  }
+}
+
+Fritzing:
+
+/**
+  Ilumina��o de garagem autom�tica
+  ------------------------
+  |  Sensor  |  Arduino  |
+  |   VCC    |    5V     |
+  |  Trig    |    4V     |
+  |  Echo    |    A4     |
+  |   GND    |    GND    |
+  ------------------------
+  @author Luis, Pedro, Lucas, Miqueias e Joao Andrade
+*/
+
+int sensorLDR = 700;
+long sensor;
+int oitava = 1;
+float SE5 = 659.25;
+float SC5 = 523.25;
+int LED = 9;
+int leitor;
+#include <Servo.h>
+Servo servo1;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(A4, INPUT);   //echo
+  pinMode(A5, OUTPUT);  //trig
+  pinMode(5, INPUT_PULLUP);
+  pinMode(10, INPUT_PULLUP);  //Campainha
+  pinMode(9, OUTPUT);        //LED
+  pinMode(8, OUTPUT);        //Buzzer
+  pinMode(12, OUTPUT);  //CONFIGURANDO O PINO 13 COMO SAIDA
+  servo1.attach(7);
+  
+ }
+
+void loop() {
+
+bluetooth();
+campainha();
+sensorLuminosidade();
+
+}
+
+void bluetooth() {
+
+
+
+  if (Serial.available()) {                //essa estrutura evita o acionamento indevido do led ou de outros dispostivos
+    leitor = Serial.read();                //armazenando a tecla pressionada na variavel leitor
+    if (leitor == '1') {                   //se tecla 1 for pressionada
+      digitalWrite(12, !digitalRead(12));  //ele vai verificar se o dispositivo esta ativado ou desativado
+    } else if (leitor == '2') {            //abrir garagem via bluetooth
+      abrirg();
+    } else if (leitor == '3') {            //fechar garagem via bluetooth
+      fecharg();
+    }
+  }  
+}
+
+void abrirg() {
+
+      servo1.write(90);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(4, LOW);
+      noTone(6);
+}
+
+void fecharg() {
+      servo1.write(0);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      noTone(6);
+      delay(500);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      tone(6, 262);
+      delay(500);
+      digitalWrite(4, LOW);
+      noTone(6);
+}
+
+void sensorLuminosidade() {
+  
+int sensorLDR = analogRead(A0);
+if (sensorLDR > 500) {
+    digitalWrite(2, LOW);
+ } else {
+    digitalWrite(2, HIGH);
+ }
+  
+}
+
+void campainha() {
+int campainha = 8;
+  
+  int sw2 = digitalRead(10);
+
+  if (sw2 == 0) {
+    tone(campainha, SE5 * oitava);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    tone(campainha, SC5 * oitava);
+    digitalWrite(LED, LOW);
+    delay(200);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+  } else {
+    digitalWrite(LED, LOW);
+    noTone(campainha);
+  }
+}
+
