@@ -10,7 +10,8 @@ trazendo também para uma maquete, onde iremos colocar em prática e mostrar as 
 
 ### Integrantes do Grupo 
 * Miquéias Rodrigues
-* Lucas Santos 
-* Luis Antônio 
-* Pedro Miranda
+* Lucas Santos
 * João Andrade
+* Luis Antônio
+* Pedro Miranda
+
