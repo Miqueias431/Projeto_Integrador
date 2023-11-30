@@ -1,4 +1,4 @@
-# Projeto_Itegrador
+# Projeto_Integrador
 
 Nesse "Projeto", iremos apresentar uma 'Casa Inteligente', onde montamos esse projeto no Tinkercad e no Fritzing, 
 trazendo também para uma maquete, onde iremos colocar em prática e mostrar as imagens de como ficou.
