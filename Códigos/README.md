@@ -22,4 +22,4 @@ Componente | Elétrica
 ![PrintAppInventor](https://github.com/Miqueias431/Projeto_Integrador/assets/129800730/5f808687-d06f-4c30-bc96-b8f328e951c2)
 
 # Esquema do AppInventor (Code)
-
+![PrintCodeAppInventor](https://github.com/Miqueias431/Projeto_Integrador/assets/129800730/1477c9cb-38b5-4d14-8137-861165828bec)
